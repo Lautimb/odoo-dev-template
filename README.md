@@ -250,7 +250,7 @@ MIT License - Libre para uso personal y comercial.
 
 ## 🆘 Soporte
 
-- 🐛 **Issues**: [GitHub Issues](https://github.com/Lautimb/odoo-17/issues)
+- 🐛 **Issues**: [GitHub Issues](https://github.com/Lautimb/odoo-dev-template/issues)
 - 📖 **Docs Odoo**: [odoo.com/documentation](https://www.odoo.com/documentation/)
 - 🐳 **Docker**: [docs.docker.com](https://docs.docker.com/)
 
@@ -337,7 +337,7 @@ MIT License - Libre para uso personal y comercial.
 
 ## 🆘 Soporte
 
-- 🐛 **Issues**: [GitHub Issues](https://github.com/Lautimb/odoo-17/issues)
+- 🐛 **Issues**: [GitHub Issues](https://github.com/Lautimb/odoo-dev-template/issues)
 - 📖 **Docs Odoo**: [odoo.com/documentation](https://www.odoo.com/documentation/)
 - 🐳 **Docker**: [docs.docker.com](https://docs.docker.com/)
 
