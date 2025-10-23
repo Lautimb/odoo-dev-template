@@ -327,7 +327,7 @@ Contributions are welcome!
 
 1. Fork este repositorio
 2. Crea tu rama: `git checkout -b mejora/nueva-caracteristica`
-3. Commit: `git commit -am 'Agregar nueva característica'`
+3. Commit: `git commit -am 'Agregar nueva característica.'`
 4. Push: `git push origin mejora/nueva-caracteristica`
 5. Abre un Pull Request
 
