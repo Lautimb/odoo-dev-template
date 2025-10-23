@@ -1,0 +1,71 @@
+services:
+  odoo:
+    container_name: odoo_igniter
+    image: odoo:18
+    restart: always
+    depends_on:
+      postgres:
+        condition: service_healthy
+    env_file:
+      - .env
+    ports:
+      - "8069:8069"
+    volumes:
+      - odoo_data:/var/lib/odoo
+      - ./odoo.conf:/etc/odoo/odoo.conf.template
+      - ./addons/:/mnt/addons
+      - ./enterprise/:/mnt/enterprise
+      - ./entrypoint.sh:/entrypoint.sh
+    entrypoint: /entrypoint.sh
+    networks:
+      - odoo18_net
+
+  postgres:
+    command: postgres -c log_statement=none -c log_min_messages=WARNING
+    container_name: postgres_igniter
+    image: postgres:17.0-bullseye
+    restart: always
+    env_file:
+      - .env
+    environment:
+      - PGDATA=/var/lib/postgresql/data
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - POSTGRES_DB=${POSTGRES_DB}
+    # Security: Comment out ports in production to avoid exposing PostgreSQL
+    ports:
+      - "5432:5432"  # Remove this line for production
+    networks:
+      - odoo18_net
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U odoo -d postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  pgadmin:
+    container_name: pgadmin_igniter
+    image: dpage/pgadmin4:latest
+    restart: always
+    env_file:
+      - .env
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=${PGADMIN_DEFAULT_EMAIL}
+      - PGADMIN_DEFAULT_PASSWORD=${PGADMIN_DEFAULT_PASSWORD}
+      - PGADMIN_LISTEN_PORT=${PGADMIN_LISTEN_PORT}
+    ports:
+      - "8080:80"
+    networks:
+      - odoo18_net
+    volumes:
+      - pgadmin_data:/var/lib/pgadmin
+
+networks:
+  odoo18_net:
+
+volumes:
+  db_data:
+  odoo_data:
+  pgadmin_data:
